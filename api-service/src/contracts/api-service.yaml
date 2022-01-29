@@ -1,0 +1,106 @@
+openapi: '3.0.2'
+info:
+  title: api_service
+  version: '1.0'
+paths:
+  /stocks/{id}:
+    get:
+      summary: Get information about stock
+      tags:
+        - stocks/{id}
+      description: Get information about stock on [stooq](https://stooq.com)
+      parameters:
+        - $ref: '#/components/parameters/StockIdParamPath'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - symbol
+                  - date
+                  - time
+                  - open
+                  - high
+                  - low
+                  - close
+                  - volume
+                  - name
+                properties:
+                  symbol:
+                    type: string
+                  date:
+                    type: string
+                  time:
+                    type: string
+                  open:
+                    type: number
+                  high:
+                    type: number
+                  low:
+                    type: number
+                  close:
+                    type: number
+                  volume:
+                    type: integer
+                  name:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+components:
+  schemas:
+    ResponseError:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - message
+              - errorCode
+            properties:
+              path:
+                type: string
+              message:
+                type: string
+              errorCode:
+                type: string
+  responses:
+    400_Bad_Request:
+      description: The server could not understand the request due to invalid syntax.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    404_Not_Found:
+      description: The server can not find the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    500_Internal:
+      description: The server has encountered a situation it does not know how to handle.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+  parameters:
+    StockIdParamPath:
+      in: path
+      name: id
+      required: true
+      description: Stock symbol
+      schema:
+        type: string
