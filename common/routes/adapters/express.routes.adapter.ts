@@ -7,6 +7,8 @@ export default (controller: BaseController) =>
     const httpRequest: HttpRequest = {
       body: req.body,
       params: req.params,
+      headers: req.headers,
+      context: req.context
     };
 
     const httpResponse: HttpResponse = await controller.handle(httpRequest);

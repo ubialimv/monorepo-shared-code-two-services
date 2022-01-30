@@ -3,10 +3,11 @@ import * as http from 'http';
 import * as https from 'https';
 
 import AxiosInterceptor from '../../../../common/http/interceptors/axios.interceptor'
-import Stock from '../../domain/stock/entities/stock';
-import { StockInterface } from '../../domain/stock/interfaces/stock.interface';
+import Stock from '../../../../common/domain/stock/entities/stock.entity';
+import { StockInterface } from '../../../../common/domain/stock/interfaces/stock.interface';
+import { StockGatewayInterface } from '../../domain/stock/gateways/stock.gateway.interface';
 
-export default class StockAxiosGateway extends AxiosInterceptor implements StockAxiosGateway {
+export default class StockAxiosGateway extends AxiosInterceptor implements StockGatewayInterface {
     private readonly client: AxiosInstance;
 
     constructor(client: AxiosInstance) {

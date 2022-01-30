@@ -1,10 +1,10 @@
 import BaseController from '../../../../../common/controller/base.controller';
 import { HttpRequest, HttpResponse } from '../../../../../common/http/http.interface';
-import StockAxiosGateway from '../../../infrastructure/gateways/stock-axios.gateway';
-import StockExceptions from '../exceptions';
+import StockExceptions from '../../../../../common/domain/stock/exceptions';
+import { StockGatewayInterface } from '../gateways/stock.gateway.interface';
 
 export default class FindOneStockController extends BaseController {
-    constructor(private readonly gateway: StockAxiosGateway) {
+    constructor(private readonly gateway: StockGatewayInterface) {
         super();
     }
 

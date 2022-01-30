@@ -14,5 +14,5 @@ export default () => [
     compression(),
     helmet(),
     morgan('combined'),
-    // openApiMiddleware(makeSpec())
+    openApiMiddleware(makeSpec())
 ];
