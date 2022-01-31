@@ -1,11 +1,11 @@
 import { UserInterface } from "./user.interface";
 
 export default class User {
-    private readonly email!: string
+    protected readonly email!: string
 
-    private readonly password!: string
+    protected readonly password!: string
 
-    private readonly root!: boolean
+    protected readonly root!: boolean
 
     constructor(props: UserInterface) {
         this.email = props.email;

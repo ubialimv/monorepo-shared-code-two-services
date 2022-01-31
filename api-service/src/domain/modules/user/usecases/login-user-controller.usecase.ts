@@ -1,13 +1,12 @@
 import jwt from 'jsonwebtoken';
 
-import BaseController from '../../../../../common/controller/base.controller';
-import { HttpRequest, HttpResponse } from '../../../../../common/http/http.interface';
-import environments from '../../../shared/environments'
-import randomPassword from '../../../shared/randomPassword';
-import User from '../entities/user.entity';
-import { UserRepositoryInterface } from '../repositories/user.repository.interface';
+import BaseController from "../../../../../../common/controller/base.controller";
+import { HttpRequest, HttpResponse } from "../../../../../../common/http/http.interface";
+import environments from '../../../../shared/environments';
+import { UserExceptions } from '../exceptions';
+import { UserRepositoryInterface } from "../repositories/user.repository.interface";
 
-export default class RegisterUserController extends BaseController {
+export default class LoginUserController extends BaseController {
     constructor(private readonly repository: UserRepositoryInterface) {
         super()
     }
@@ -16,12 +15,13 @@ export default class RegisterUserController extends BaseController {
         try {
             const { email } = req.body;
 
-            const userData = {
-                email,
-                password: randomPassword(),
+            const user = await this.repository.findUserByEmail(email);
+
+            if (!user) {
+                return this.notFound(UserExceptions.USER_NOT_FOUND);
             }
 
-            await this.repository.create(new User(userData));
+            const userData = user.toResponse();
 
             // const token = jwt.sign({ data: userData, exp: environments.TOKEN_EXPIRATION }, environments.APP_SECRET);
             const token = jwt.sign(userData, environments.APP_SECRET, {

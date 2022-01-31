@@ -7,25 +7,31 @@ const authMiddleware = (
     res: Response,
     next: NextFunction,
 ) => {
-    const token = req.headers["authorization"];
+    try {
+        const token = req.headers["authorization"];
 
-    if (!token) {
-        return res.sendStatus(401);
+        if (!token) {
+            return res.status(401).send({ message: 'Not authorized. Authenticate first' });
+        }
+
+        return jwt.verify(token, environments.APP_SECRET, (err: any, decoded: any) => {
+            if (err) {
+                return res.status(401).send({ message: 'Error validating token' });
+            }
+
+            const currentUser = {
+                email: decoded.email,
+                root: decoded.root,
+            }
+
+            req.context = currentUser;
+
+            return next();
+        })
+    } catch (error: any) {
+        return res.status(500).send({ message: error.message });
     }
 
-    return jwt.verify(token, environments.APP_SECRET, (err: any, decoded: any) => {
-        if (err) {
-            return res.sendStatus(403)
-        }
-
-        const currentUser = {
-            email: decoded.email,
-        }
-
-        req.context = currentUser
-
-        return next()
-    })
 }
 
 export default authMiddleware

@@ -8,7 +8,8 @@ export default (controller: BaseController) =>
       body: req.body,
       params: req.params,
       headers: req.headers,
-      context: req.context
+      context: req.context,
+      query: req.query,
     };
 
     const httpResponse: HttpResponse = await controller.handle(httpRequest);

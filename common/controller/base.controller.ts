@@ -14,10 +14,10 @@ export default abstract class BaseController {
     return response;
   }
 
-  public badRequest(error: Error): HttpResponse {
+  public badRequest(message: string): HttpResponse {
     return {
       statusCode: 400,
-      body: error.message,
+      body: new GeneralError(message),
     };
   }
 
@@ -28,14 +28,14 @@ export default abstract class BaseController {
     };
   }
 
-  public NotFound(message: string): HttpResponse {
+  public notFound(message: string): HttpResponse {
     return {
       statusCode: 404,
       body: new GeneralError(message),
     };
   }
 
-  public BusinessError(message: string): HttpResponse {
+  public businessError(message: string): HttpResponse {
     return {
       statusCode: 422,
       body: new GeneralError(message),

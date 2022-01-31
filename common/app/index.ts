@@ -18,9 +18,9 @@ export interface ErrorHandlerInterface {
 }
 
 export default class App {
-  public readonly application: Application;
+  private readonly application: Application;
 
-  public readonly port: number;
+  private readonly port: number;
 
   constructor(props: {
     port: number;

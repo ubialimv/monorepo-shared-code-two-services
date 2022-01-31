@@ -1,25 +1,36 @@
 import { StockInterface } from "../interfaces/stock.interface";
 
 export default class Stock {
-    private readonly symbol!: string;
+    public readonly symbol!: string;
 
-    private readonly date!: string;
+    public readonly date!: string;
 
-    private readonly time!: string;
+    public readonly time!: string;
 
-    private readonly open!: number;
+    public readonly open!: number;
 
-    private readonly high!: number;
+    public readonly high!: number;
 
-    private readonly low!: number;
+    public readonly low!: number;
 
-    private readonly close!: number;
+    public readonly close!: number;
 
-    private readonly volume!: number;
+    public readonly volume!: number;
 
-    private readonly name!: string;
+    public readonly name!: string;
 
     constructor(props: StockInterface) {
         Object.assign(this, props);
+    }
+
+    public toPlain() {
+        return {
+            name: this.name,
+            symbol: this.symbol,
+            open: this.open,
+            high: this.high,
+            low: this.low,
+            close: this.close,
+        }
     }
 }

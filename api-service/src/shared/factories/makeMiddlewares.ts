@@ -14,5 +14,6 @@ export default () => [
     compression(),
     helmet(),
     morgan('combined'),
+    //TODO fix middleware
     // openApiMiddleware(makeSpec())
 ];

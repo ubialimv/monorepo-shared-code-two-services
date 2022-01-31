@@ -15,7 +15,7 @@ export default class FindOneStockController extends BaseController {
             const stock = await this.gateway.getStock(id);
 
             if (!stock) {
-                return this.NotFound(StockExceptions.STOCK_NOT_FOUND);
+                return this.notFound(StockExceptions.STOCK_NOT_FOUND);
             }
 
             return this.ok(200, stock);

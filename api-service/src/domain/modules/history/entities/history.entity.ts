@@ -27,4 +27,17 @@ export default class History {
         this.close = props.close;
         this.userId = props.userId;
     }
+
+    toPlain() {
+        return {
+            date: this.date,
+            symbol: this.symbol,
+            name: this.name,
+            open: this.open,
+            high: this.high,
+            low: this.low,
+            close: this.close,
+            userId: this.userId,
+        }
+    }
 }
