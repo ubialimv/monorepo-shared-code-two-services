@@ -1,0 +1,21 @@
+{
+  "name": "node-challenge-ubialimv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@git.jobsity.com:ubialimv/node-challenge-ubialimv.git",
+  "author": "ubialimv <ubiali.marcosvenicius@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "lint": "yarn workspace api-service run lint && yarn workspace stock-service run lint && yarn workspace ubialimv-common run lint",
+    "prettier": "yarn workspace api-service run prettier && yarn workspace stock-service run prettier && yarn workspace ubialimv-common run prettier",
+    "start:dev:api-service": "yarn workspace api-service run dev",
+    "start:dev:stock-service": "yarn workspace stock-service run dev"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}

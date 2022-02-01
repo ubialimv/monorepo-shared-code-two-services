@@ -1,0 +1,273 @@
+openapi: '3.0.2'
+info:
+  title: api_service
+  version: '1.0'
+paths:
+  /users/register:
+    post:
+      summary: Register an user
+      tags:
+        - /users
+      description: Register a new user. Notice that e-mail duplication is not allowed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  example: marcos@mail.com
+                root:
+                  type: boolean
+                  example: false
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+  /users/login:
+    post:
+      summary: Login an user
+      tags:
+        - /users
+      description: Login an user by email and return a valid token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  example: marcos@mail.com
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/User'
+                  - type: object
+                    required:
+                      - token
+                    properties:
+                      token:
+                        type: string
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+  /users/history:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Stocks requested by the user
+      tags:
+        - /users
+      description: Get information about the stocks requested by the user.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Stock'
+                    - type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date-time
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '401':
+          $ref: '#/components/responses/401_Unauthorized'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+  /stats:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Get information most requested stocks
+      tags:
+        - stats
+      description: Get information about the top 5 requested stocks
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - stock
+                    - timesRequested
+                  properties:
+                    stock:
+                      type: string
+                    timesRequested:
+                      type: integer
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '401':
+          $ref: '#/components/responses/401_Unauthorized'
+        '403':
+          $ref: '#/components/responses/403_Forbidden'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+  /stocks/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Get information about stock
+      tags:
+        - stocks/{id}
+      description: Get information about stock on stock_service. Any request on this route will generate a history of stocks requested by user.
+      parameters:
+        - $ref: '#/components/parameters/StockIdParamPath'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+        '400':
+          $ref: '#/components/responses/400_Bad_Request'
+        '401':
+          $ref: '#/components/responses/401_Unauthorized'
+        '404':
+          $ref: '#/components/responses/404_Not_Found'
+        '500':
+          $ref: '#/components/responses/500_Internal'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token
+      bearerFormat: JWT
+
+  schemas:
+    ResponseError:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+              - path
+              - message
+              - errorCode
+            properties:
+              path:
+                type: string
+              message:
+                type: string
+              errorCode:
+                type: string
+    Stock:
+      type: object
+      required:
+        - name
+        - symbol
+        - open
+        - high
+        - low
+        - close
+      properties:
+        symbol:
+          type: string
+        open:
+          type: number
+        high:
+          type: number
+        low:
+          type: number
+        close:
+          type: number
+        name:
+          type: string
+    User:
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        root:
+          type: boolean
+  responses:
+    400_Bad_Request:
+      description: The server could not understand the request due to invalid syntax.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    401_Unauthorized:
+      description: Authorization not informed in the request or is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    403_Forbidden:
+      description: This resource is not allowed. Only root users.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    404_Not_Found:
+      description: The server can not find the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    500_Internal:
+      description: The server has encountered a situation it does not know how to handle.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+  parameters:
+    StockIdParamPath:
+      in: path
+      name: id
+      required: true
+      description: Stock symbol
+      schema:
+        type: string
+        example: aapl.us
