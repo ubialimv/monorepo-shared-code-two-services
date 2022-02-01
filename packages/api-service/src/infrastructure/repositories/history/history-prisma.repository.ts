@@ -1,6 +1,5 @@
 import historyEntity from '../../../domain/modules/history/entities/history.entity';
 import PersistedHistory from '../../../domain/modules/history/entities/persisted-history.entity';
-import PersistedHistoryEntity from '../../../domain/modules/history/entities/persisted-history.entity';
 import { HistoryRepositoryInterface } from '../../../domain/modules/history/repositories/history.repository.interface';
 import { PersistedHistoryInterface } from '../../../domain/modules/history/entities/persisted-history.interface';
 import prismaHelper from '../../database/prisma.helper';
@@ -25,7 +24,7 @@ const modelToEntity = (model: History) => {
 export default class HistoryPrismaRepository
   implements HistoryRepositoryInterface
 {
-  async create(history: historyEntity): Promise<PersistedHistoryEntity> {
+  async create(history: historyEntity): Promise<PersistedHistory> {
     const historyCreated = await prismaHelper.history.create({
       data: history.toPlain(),
     });

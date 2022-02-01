@@ -9,7 +9,8 @@ import {
 
 export default class MessageBrokerRabbitMqPublisher
   extends MessageBrokerRabbitClient
-  implements MessageBrokerRabbitPublisherInterface {
+  implements MessageBrokerRabbitPublisherInterface
+{
   constructor(
     private readonly helper: MessageBrokerRabbitHelperInterface,
     private readonly queue: MessageBrokerRabbitPublisherConfigInterface,

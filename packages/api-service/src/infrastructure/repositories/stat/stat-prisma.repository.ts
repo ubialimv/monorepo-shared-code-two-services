@@ -16,13 +16,13 @@ export default class StatPrismaRepository implements StatRepositoryInterface {
       where: { stock },
       create: {
         stock,
-        timesRequested: 1
+        timesRequested: 1,
       },
       update: {
         timesRequested: {
-          increment: 1
-        }
-      }
-    })
+          increment: 1,
+        },
+      },
+    });
   }
 }

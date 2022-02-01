@@ -1,6 +1,11 @@
-import { MessageBrokerRabbitMqPublisher, MessageBrokerRabbitPublisherConfigInterface } from "ubialimv-common"
+import {
+  MessageBrokerRabbitMqPublisher,
+  MessageBrokerRabbitPublisherConfigInterface,
+} from 'ubialimv-common';
 import makeMessageBrokerHelper from './makeMessageBrokerHelper';
 import environments from '../environments';
+
+let publisher: MessageBrokerRabbitMqPublisher | undefined;
 
 const config: MessageBrokerRabbitPublisherConfigInterface = {
   assertQueues: [
@@ -42,5 +47,10 @@ const config: MessageBrokerRabbitPublisherConfigInterface = {
   ],
 };
 
-export default () =>
-  new MessageBrokerRabbitMqPublisher(makeMessageBrokerHelper(), config);
+if (!publisher) {
+  publisher = new MessageBrokerRabbitMqPublisher(
+    makeMessageBrokerHelper(),
+    config,
+  );
+}
+export default () => publisher!;

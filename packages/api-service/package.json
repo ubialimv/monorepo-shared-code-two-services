@@ -4,8 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^3.8.1",
-    "amqp-connection-manager": "^4.0.1",
+    "@prisma/client": "^3.9.0",
     "amqplib": "^0.8.0",
     "axios": "^0.25.0",
     "compression": "^1.7.4",
@@ -23,10 +22,10 @@
   "scripts": {
     "prettier": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint . --ext .ts",
-    "dev": "ts-node src/server.ts"
+    "dev": "ts-node src/server.ts",
+    "prisma:studio": "npx prisma studio"
   },
   "devDependencies": {
-    "@types/amqp-connection-manager": "^2.0.12",
     "@types/amqplib": "^0.8.2",
     "@types/axios": "^0.14.0",
     "@types/compression": "^1.7.2",
@@ -45,6 +44,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "prisma": "^3.9.0",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8"
   }
