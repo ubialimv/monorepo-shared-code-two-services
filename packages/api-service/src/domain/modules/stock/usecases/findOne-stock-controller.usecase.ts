@@ -34,21 +34,17 @@ export default class FindOneStockController extends BaseController {
 
       const user = await this.userRepository.findUserByEmail(email);
 
-      //TODO add toPlain to Stock entity
       const history = new History({
         userId: user!.toPlain().id,
-        symbol: stock.symbol,
-        name: stock.name,
-        close: stock.close,
-        high: stock.high,
-        low: stock.low,
-        open: stock.open,
+        ...stock.toPlain(),
       });
 
       await this.historyRepository.create(history);
-      await this.publisher.publish(environments.STOCK_EXCHANGE, { stock: stock.symbol });
+      await this.publisher.publish(environments.STOCK_EXCHANGE, {
+        stock: stock.symbol,
+      });
 
-      return this.ok(200, stock);
+      return this.ok(200, stock.toResponse());
     } catch (error: any) {
       return this.serverError(error.message);
     }

@@ -34,6 +34,6 @@ export default class Stock {
   }
 
   toResponse() {
-    this.toPlain();
+    return this.toPlain();
   }
 }

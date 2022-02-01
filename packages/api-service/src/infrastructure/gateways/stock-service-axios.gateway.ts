@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import * as http from 'http';
 import * as https from 'https';
-import { Stock, AxiosInterceptor } from 'ubialimv-common';
+import { Stock, AxiosInterceptor, StockInterface } from 'ubialimv-common';
 
 import { StockServiceGatewayInterface } from '../../domain/modules/stock/gateways/stock-service.gateway.interface';
 
@@ -19,6 +19,7 @@ export default class StockServiceAxiosGateway
   }
 
   async findOne(id: string): Promise<Stock | null> {
-    return this.client.get(`stocks/${id}`);
+    const response = await this.client.get<any, StockInterface>(`stocks/${id}`);
+    return new Stock(response);
   }
 }
