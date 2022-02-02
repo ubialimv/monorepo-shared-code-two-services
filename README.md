@@ -4,7 +4,7 @@
 
 This monorepo is composed by 3 packages:
 
-- api-service: Web-facing service that allows to register users, login, request stock information, query user's history of requests and stats based on top 5 requested stocks;
+- api-service: Web-facing service that allows registering users, log in, request stock information, query user's history about stock requests and stats based on top 5 requested stocks;
 - common: Codebase sheared between `api-service` and `stock-service`;
 - stock-service: Internal service that gets stock information from [stooq](https://stooq.com/t/?i=518) and returns to the service that has requested the information.
 
