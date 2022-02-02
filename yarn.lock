@@ -285,7 +285,7 @@
     "@types/express" "*"
     "@types/serve-static" "*"
 
-"@typescript-eslint/eslint-plugin@^5.10.1":
+"@typescript-eslint/eslint-plugin@^5.10.2":
   version "5.10.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.10.2.tgz#f8c1d59fc37bd6d9d11c97267fdfe722c4777152"
   integrity sha512-4W/9lLuE+v27O/oe7hXJKjNtBLnZE8tQAFpapdxwSVHqtmIoPB1gph3+ahNwVuNL37BX7YQHyGF9Xv6XCnIX2Q==
@@ -300,7 +300,7 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/parser@^5.10.1":
+"@typescript-eslint/parser@^5.10.2":
   version "5.10.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.10.2.tgz#b6076d27cc5499ce3f2c625f5ccde946ecb7db9a"
   integrity sha512-JaNYGkaQVhP6HNF+lkdOr2cAs2wdSZBoalE22uYWq8IEv/OVH0RksSGydk+sW8cLoSeYmC+OHvRyv2i4AQ7Czg==
@@ -1984,7 +1984,7 @@ prettier@^2.5.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
-prisma@^3.8.1:
+prisma@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/prisma/-/prisma-3.9.0.tgz#7aea4e35b385b980fef3c4a5a15c82b034a31006"
   integrity sha512-KppIukAgJH6o4q9CRYQUqpJUFt8XOK+5eTlv9W+w/SnaSzar+zbT7RCxspCkoGGVSASAQDMYWSKm3QON/o5ENg==

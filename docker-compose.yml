@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   rabbitmq:
-    container_name: node_rabbitmq
+    container_name: ubialimv_rabbitmq
     image: 'rabbitmq:3-management'
     ports:
       - '5672:5672'
@@ -17,7 +17,17 @@ services:
       retries: 3
       start_period: 30s
     volumes:
-      - node-rabbitmq-data:/var/lib/rabbitmq
+      - ubialimv-data:/var/lib/rabbitmq
+
+  db:
+    container_name: ubialimv_postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ubialimv-data:/var/lib/postgresql/data
 
 volumes:
-  node-rabbitmq-data:
+  ubialimv-data:

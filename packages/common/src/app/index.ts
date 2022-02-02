@@ -8,7 +8,10 @@ import express, {
 import * as swaggerUI from 'swagger-ui-express';
 
 import loadYamlFile from '../helpers/loadYamlFile';
-import { MessageBrokerRabbitConsumerInterface, MessageBrokerRabbitPublisherInterface } from '../infrastructure';
+import {
+  MessageBrokerRabbitConsumerInterface,
+  MessageBrokerRabbitPublisherInterface,
+} from '../infrastructure';
 
 export interface RoutesInterface {
   (router: Router): void;
@@ -19,8 +22,8 @@ export interface ErrorHandlerInterface {
 }
 
 export interface MessageBrokerConfig {
-  messageBrokerPublisher?: MessageBrokerRabbitPublisherInterface,
-  messageBrokerConsumers?: MessageBrokerRabbitConsumerInterface
+  messageBrokerPublisher?: MessageBrokerRabbitPublisherInterface;
+  messageBrokerConsumers?: MessageBrokerRabbitConsumerInterface;
 }
 
 export default class App {
@@ -34,7 +37,7 @@ export default class App {
     port: number;
     middleWares: any[];
     routes: RoutesInterface[];
-    messageBrokerConfig?: MessageBrokerConfig,
+    messageBrokerConfig?: MessageBrokerConfig;
     spec?: string;
     errorHandler?: ErrorHandlerInterface;
   }) {
@@ -85,7 +88,7 @@ export default class App {
   }
 
   public async start() {
-    this.listen()
+    this.listen();
 
     await this.messageBrokerConfig?.messageBrokerConsumers?.attach();
     await this.messageBrokerConfig?.messageBrokerPublisher?.start();

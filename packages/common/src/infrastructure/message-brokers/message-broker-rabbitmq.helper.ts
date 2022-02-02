@@ -4,9 +4,9 @@ import { MessageBrokerRabbitHelperInterface } from './message-broker-rabbitmq.in
 import { MessageBrokerClientType } from './message-broker-rabbitmq.enum';
 
 export default class MessageBrokerRabbitHelper
-  implements MessageBrokerRabbitHelperInterface {
-
-  constructor(private readonly url: string) { }
+  implements MessageBrokerRabbitHelperInterface
+{
+  constructor(private readonly url: string) {}
 
   public createConnection(
     origin: MessageBrokerClientType,

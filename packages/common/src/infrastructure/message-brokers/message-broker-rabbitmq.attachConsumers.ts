@@ -9,12 +9,12 @@ import {
 
 export default class MessageBrokerRabbitMqAttachConsumers
   extends MessageBrokerRabbitClient
-  implements MessageBrokerRabbitConsumerInterface {
+  implements MessageBrokerRabbitConsumerInterface
+{
   constructor(
     private readonly helper: MessageBrokerRabbitHelperInterface,
     private readonly consumers: MessageBrokerRabbitMqBaseConsumer[],
-    private readonly prefetch: number
-
+    private readonly prefetch: number,
   ) {
     super(MessageBrokerClientType.Consumer);
   }
@@ -30,9 +30,7 @@ export default class MessageBrokerRabbitMqAttachConsumers
       }
 
       await this.channel?.addSetup((confirmChannel: ConfirmChannel) => {
-        const prefetch = confirmChannel.prefetch(
-          this.prefetch,
-        );
+        const prefetch = confirmChannel.prefetch(this.prefetch);
 
         const assertQueues = this.consumers.map((consumer) =>
           confirmChannel.assertQueue(

@@ -25,7 +25,7 @@ export default class StockRabbitMqConsumer extends MessageBrokerRabbitMqBaseCons
           console.log(
             `${
               this.queue.name
-            } consumed successfully. Message: ${JSON.stringify(payload)}`,
+            } consumed successfully. Message: ${JSON.stringify(message)}`,
           );
         } catch (error: any) {
           console.log(error);

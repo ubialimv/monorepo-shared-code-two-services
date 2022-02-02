@@ -12,11 +12,20 @@
   "scripts": {
     "lint": "yarn workspace api-service run lint && yarn workspace stock-service run lint && yarn workspace ubialimv-common run lint",
     "prettier": "yarn workspace api-service run prettier && yarn workspace stock-service run prettier && yarn workspace ubialimv-common run prettier",
+    "create:db:api-service": "yarn workspace api-service prisma:db",
     "start:dev:api-service": "yarn workspace api-service run dev",
     "api-service:prisma:studio": "yarn workspace api-service run prisma:studio",
     "start:dev:stock-service": "yarn workspace stock-service run dev"
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "ts-node-dev": "^1.1.8"
   }
 }
