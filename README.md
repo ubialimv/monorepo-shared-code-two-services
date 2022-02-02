@@ -28,12 +28,6 @@ The `api-service` has three dependencies, `postgres`, `rabbitMq` and `stock-serv
 $ docker-compose up
 ```
 
-After you run the above command you'll need to create the database and its tables, you can run the following in the root folder of the repository:
-
-```bash
-$ yarn workspace api-service run prisma:db
-```
-
 Before starting the `api-service`, you'll need to start `stock-service`. Check the next section to do it.
 
 ### Development
@@ -43,18 +37,26 @@ Once you have done the previous steps you may be able to start the services on d
 All done? go to the root folder of the repository and run:
 
 ```bash
-# api-service
-$ yarn workspace api-service run dev
-```
-
-```bash
 # stock-service
 $ yarn workspace stock-service run dev
 ```
 
+Before starting `api-service` you'll need to create the database and its tables, you can run the following in the root folder of the repository
+
+```bash
+$ yarn workspace api-service run prisma:db
+```
+Now you can run:
+
+```bash
+# api-service
+$ yarn workspace api-service run dev
+```
+
+
 ### Production
 
-To start the services on production mode, you need to make sure that you already have created the `.env` files in the root folder of the `api-service` and `stock-service` as well. See [Development](#development). Once you confirmed, go to the root folder of the repository and run:
+To start the services on production mode, you need to make sure that you already have created the `.env` files in the root folder of the `api-service` and `stock-service` as well and has created the database/tables. See [Development](#development). Once you confirmed, go to the root folder of the repository and run:
 
 ```bash
 # building
@@ -94,7 +96,7 @@ $ yarn workspace stock-service run start
 - APP_PORT: Port the service is going to use;
 - STOCK_URL=The url from [stoop](https://stooq.com);
 
-## Aditional info
+## Additional info
 
 - Some routes from `api-service` require authentication, so you'll need a valid JWT token with this specification: `Bearer <token>`. You can get one, after registering a user `POST users/register` and then logging in using `POST users/login`. Detailed information can be found after you start up the `api-service` and go to `GET /docs`.
 
