@@ -3,6 +3,8 @@ import { MessageBrokerRabbitAssertQueueInterface } from 'ubialimv-common';
 import makeStatIncrementService from './makeStatIncrementService';
 import environments from '../environments';
 
+let consumer: StockRabbitMqConsumer | undefined;
+
 const config: MessageBrokerRabbitAssertQueueInterface = {
   name: environments.STOCK_QUEUE,
   options: {
@@ -11,5 +13,8 @@ const config: MessageBrokerRabbitAssertQueueInterface = {
   },
 };
 
-export default () =>
-  new StockRabbitMqConsumer(makeStatIncrementService(), config);
+if (!consumer) {
+  consumer = new StockRabbitMqConsumer(makeStatIncrementService(), config);
+}
+export default () => consumer!;
+  
