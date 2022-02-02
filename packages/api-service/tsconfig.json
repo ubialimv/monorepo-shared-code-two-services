@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist/api-service",
-    "typeRoots": ["@types", "./node_modules/@types"]
+    "outDir": "dist/src"
   }
 }

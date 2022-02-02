@@ -18,7 +18,11 @@
   "scripts": {
     "prettier": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint . --ext .ts",
-    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
+    "clean:build": "rm -rf dist",
+    "copy-contracts": "mkdir -p dist/src/contracts && cp src/contracts/*.yaml dist/src/contracts",
+    "build": "yarn run clean:build; tsc -p .;yarn run copy-contracts",
+    "start": "ts-node dist/src/server.js"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

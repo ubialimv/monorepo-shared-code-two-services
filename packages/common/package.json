@@ -24,6 +24,8 @@
   },
   "scripts": {
     "prettier": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "clean:build": "rm -rf dist",
+    "build": "yarn run clean:build; tsc -p ."
   }
 }

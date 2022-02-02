@@ -11,11 +11,7 @@
   ],
   "scripts": {
     "lint": "yarn workspace api-service run lint && yarn workspace stock-service run lint && yarn workspace ubialimv-common run lint",
-    "prettier": "yarn workspace api-service run prettier && yarn workspace stock-service run prettier && yarn workspace ubialimv-common run prettier",
-    "create:db:api-service": "yarn workspace api-service prisma:db",
-    "start:dev:api-service": "yarn workspace api-service run dev",
-    "api-service:prisma:studio": "yarn workspace api-service run prisma:studio",
-    "start:dev:stock-service": "yarn workspace stock-service run dev"
+    "prettier": "yarn workspace api-service run prettier && yarn workspace stock-service run prettier && yarn workspace ubialimv-common run prettier"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",
