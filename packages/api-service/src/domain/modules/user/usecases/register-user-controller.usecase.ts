@@ -10,18 +10,11 @@ export default class RegisterUserController extends BaseController {
 
   public async handle(req: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email } = req.body;
-
-      const userData = {
-        email,
-        password: randomPassword(),
-      };
-
-      const user = new User(userData);
+      const user = new User({...req.body, password: randomPassword()});
 
       const createdUser = await this.repository.create(user);
 
-      return this.ok(200, createdUser.toResponse());
+      return this.ok(200, createdUser.toPlain());
     } catch (error: any) {
       return this.serverError(error.message);
     }
