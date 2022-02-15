@@ -12,11 +12,11 @@ export default class LoginUserController extends BaseController {
 
   public async handle(req: HttpRequest): Promise<HttpResponse> {
     try {
-      const { email } = req.body;
+      const { email, password } = req.body;
 
       const user = await this.repository.findUserByEmail(email);
 
-      if (!user) {
+      if (!user || user.toPlain().password !== password) {
         return this.notFound(UserExceptions.USER_NOT_FOUND);
       }
 
