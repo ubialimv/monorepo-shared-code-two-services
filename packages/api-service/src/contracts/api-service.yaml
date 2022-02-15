@@ -51,10 +51,14 @@ paths:
               type: object
               required:
                 - email
+                - password
               properties:
                 email:
                   type: string
                   example: marcos@mail.com
+                password:
+                  type: string
+                  example: 'your-password'
       responses:
         '200':
           description: Successful operation
