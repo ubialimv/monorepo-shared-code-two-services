@@ -22,7 +22,6 @@ export default class LoginUserController extends BaseController {
 
       const userData = user.toResponse();
 
-      // const token = jwt.sign({ data: userData, exp: environments.TOKEN_EXPIRATION }, environments.APP_SECRET);
       const token = jwt.sign(userData, environments.APP_SECRET, {
         expiresIn: environments.TOKEN_EXPIRATION,
       });
